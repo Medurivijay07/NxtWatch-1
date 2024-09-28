@@ -30,3 +30,30 @@ export const GamingItemsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
 `
+export const GamingLoaderContainer = styled.div`
+  min-height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const GamingFailureViewContainer = styled.div`
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+export const FailureImage = styled.img`
+  width: 40%;
+`
+export const GamingRetryButton = styled.button`
+  background-color: #4f46e5;
+  color: #ffffff;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  outline: none;
+`

@@ -1,4 +1,3 @@
-import {MdDarkMode} from 'react-icons/md'
 import {withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
@@ -10,6 +9,8 @@ import {
   ProfileImage,
   WebsiteLogo,
   LinkItem,
+  DarkModeIcon,
+  DarkModeButton,
 } from './styledComponents'
 
 const Header = props => {
@@ -22,15 +23,22 @@ const Header = props => {
   return (
     <HeaderContainer>
       <LinkItem to="/">
-        <WebsiteLogo src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+        <WebsiteLogo
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+          alt="website logo"
+        />
       </LinkItem>
       <RightHeaderList>
+        <DarkModeButton type="button" data-testid="theme">
+          <DarkModeIcon />
+        </DarkModeButton>
         <HeaderItem>
           <ProfileImage
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
             alt="profile"
           />
         </HeaderItem>
+
         <HeaderItem>
           <LogoutButton type="button" onClick={onClickingLogout}>
             Logout

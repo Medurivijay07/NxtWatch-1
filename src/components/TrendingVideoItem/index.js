@@ -6,24 +6,27 @@ import {
   TrendingContentContainer,
   TrendingVideoTitle,
   PublishedAndViewsContainer,
+  LinkItem,
 } from './styledComponents'
 
 const TrendingVideoItem = props => {
   const {item} = props
-  const {thumbnailUrl, title, channel, viewCount, publishedAt} = item
+  const {id, thumbnailUrl, title, channel, viewCount, publishedAt} = item
   const date = formatDistanceToNow(new Date(publishedAt), {addSuffix: true})
   const {name} = channel
   return (
     <TrendingItem>
-      <ThumbnailImageTrending src={thumbnailUrl} />
-      <TrendingContentContainer>
-        <TrendingVideoTitle>{title}</TrendingVideoTitle>
-        <p>{name}</p>
-        <PublishedAndViewsContainer>
-          <p>{viewCount} views </p>
-          <p> . {date}</p>
-        </PublishedAndViewsContainer>
-      </TrendingContentContainer>
+      <LinkItem to={`/videos/${id}`}>
+        <ThumbnailImageTrending src={thumbnailUrl} alt="video thumbnail" />
+        <TrendingContentContainer>
+          <TrendingVideoTitle>{title}</TrendingVideoTitle>
+          <p>{name}</p>
+          <PublishedAndViewsContainer>
+            <p>{viewCount} views </p>
+            <p> . {date}</p>
+          </PublishedAndViewsContainer>
+        </TrendingContentContainer>
+      </LinkItem>
     </TrendingItem>
   )
 }

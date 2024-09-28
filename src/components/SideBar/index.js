@@ -42,7 +42,7 @@ const SideBar = () => (
       </LinkItem>
     </TopContainer>
     <BottomContainer>
-      <h1>CONTACT US</h1>
+      <p>CONTACT US</p>
       <SocialMediaIconsContainer>
         <SocialMediaIcon
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
@@ -54,7 +54,7 @@ const SideBar = () => (
         />
         <SocialMediaIcon
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
-          alt="linkedin logo"
+          alt="linked in logo"
         />
       </SocialMediaIconsContainer>
       <p>Enjoy! Now to see your channels and recommendations!</p>

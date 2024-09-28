@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import {FaMoon} from 'react-icons/fa'
 
 export const HeaderContainer = styled.div`
   height: 15vh;
@@ -16,6 +17,17 @@ export const RightHeaderList = styled.ul`
 export const HeaderItem = styled.li`
   margin-right: 10px;
 `
+export const DarkModeButton = styled.button`
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+`
+export const DarkModeIcon = styled(FaMoon)`
+  font-size: 35px;
+  margin-right: 30px;
+`
+
 export const LogoutButton = styled.button`
   color: #3b82f6;
   border: 1px solid #3b82f6;

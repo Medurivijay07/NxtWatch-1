@@ -112,7 +112,10 @@ class Login extends Component {
     return (
       <LoginAppContainer>
         <LoginBoxContainer>
-          <LogoImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+          <LogoImage
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            alt="website logo"
+          />
           <FormContainer onSubmit={this.onSubmitForm}>
             {this.renderUsername()}
             {this.renderPassword()}

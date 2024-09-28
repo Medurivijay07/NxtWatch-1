@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const VideoItemContainer = styled.li`
   margin-right: 10px;
@@ -21,11 +22,15 @@ export const VideoDetailsRightContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   color: #1e293b;
   font-size: 14px;
 `
 export const ViewsPostedContainer = styled.div`
   display: flex;
   align-items: center;
+`
+export const LinkItem = styled(Link)`
+  text-decoration: none;
+  color: #000000;
 `

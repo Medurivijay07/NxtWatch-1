@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import Loader from 'react-loader-spinner'
 
 import SideBar from '../SideBar'
 import Header from '../Header'
@@ -10,16 +11,28 @@ import {
   GamingBanner,
   GamingIcon,
   GamingItemsList,
+  GamingLoaderContainer,
+  GamingFailureViewContainer,
+  FailureImage,
+  GamingRetryButton,
 } from './styledComponents'
 
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inprogress: 'INPROGRESS',
+}
+
 class Gaming extends Component {
-  state = {gameDetails: {}}
+  state = {gameDetails: {}, apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getGameDetails()
   }
 
   getGameDetails = async () => {
+    this.setState({apiStatus: apiStatusConstants.inprogress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/videos/gaming'
     const options = {
@@ -40,8 +53,17 @@ class Gaming extends Component {
           viewCount: Item.view_count,
         })),
       }
-      this.setState({gameDetails: updatedData})
+      this.setState({
+        gameDetails: updatedData,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
+  }
+
+  onClickingRetry = () => {
+    this.getGameDetails()
   }
 
   renderGamingBanner = () => (
@@ -63,12 +85,44 @@ class Gaming extends Component {
     )
   }
 
+  renderLoadingView = () => (
+    <GamingLoaderContainer data-testid="loader">
+      <Loader type="ThreeDots" color="#00306e" height="50" width="50" />
+    </GamingLoaderContainer>
+  )
+
+  renderFailureView = () => (
+    <GamingFailureViewContainer>
+      <FailureImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png" />
+      <h1>Oops! Something Went Wrong</h1>
+      <p>We are haing some trouble to complete your request.</p>
+      <p>Please try again.</p>
+      <GamingRetryButton type="button" onClick={this.onClickingRetry}>
+        Retry
+      </GamingRetryButton>
+    </GamingFailureViewContainer>
+  )
+
   renderGamingRightContainer = () => (
     <GamingRightContainer>
       {this.renderGamingBanner()}
-      {this.renderGamingItems()}
+      {this.renderUsingSwitch()}
     </GamingRightContainer>
   )
+
+  renderUsingSwitch = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderGamingItems()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.inprogress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
 
   render() {
     return (

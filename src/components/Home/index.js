@@ -97,7 +97,10 @@ class Home extends Component {
   renderHomeBanner = () => (
     <HomeBannerContainer data-testid="banner">
       <HomeBannerLeftContainer>
-        <HomeBannerLogo src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+        <HomeBannerLogo
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+          alt="nxt watch logo"
+        />
         <p>Buy Nxt Watch Premium prepaid plans with UPI</p>
         <GetItNowButton type="button">GET IT NOW</GetItNowButton>
       </HomeBannerLeftContainer>
@@ -140,7 +143,10 @@ class Home extends Component {
 
   renderFailureView = () => (
     <FailureViewContainer>
-      <FailureImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png" />
+      <FailureImage
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+        alt="failure view"
+      />
       <h1>Oops! Something Went Wrong</h1>
       <p>We are haing some trouble to complete your request.</p>
       <p>Please try again</p>

@@ -31,4 +31,5 @@ export const SocialMediaIcon = styled.img`
 `
 export const LinkItem = styled(Link)`
   text-decoration: none;
+  color: #000000;
 `

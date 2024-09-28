@@ -1,13 +1,20 @@
-import {GamingItem, GamingThumbnail, GameItemTitle} from './styledComponents'
+import {
+  GamingItem,
+  GamingThumbnail,
+  GameItemTitle,
+  LinkItem,
+} from './styledComponents'
 
 const GamingVideoItem = props => {
   const {item} = props
-  const {thumbnailUrl, viewCount, title} = item
+  const {id, thumbnailUrl, viewCount, title} = item
   return (
     <GamingItem>
-      <GamingThumbnail src={thumbnailUrl} />
-      <GameItemTitle>{title}</GameItemTitle>
-      <p>{viewCount} Watching Worldwide</p>
+      <LinkItem to={`/videos/${id}`}>
+        <GamingThumbnail src={thumbnailUrl} alt="video thumbnail" />
+        <GameItemTitle>{title}</GameItemTitle>
+        <p>{viewCount} Watching Worldwide</p>
+      </LinkItem>
     </GamingItem>
   )
 }
