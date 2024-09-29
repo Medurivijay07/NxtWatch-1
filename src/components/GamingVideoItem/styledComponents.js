@@ -13,5 +13,5 @@ export const GameItemTitle = styled.p`
 `
 export const LinkItem = styled(Link)`
   text-decoration: none;
-  color: #000000;
+  color: ${props => (props.isDark ? '#ffffff' : '#000000')};
 `

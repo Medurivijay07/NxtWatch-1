@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 
+import ThemeContext from '../../context/ThemeContext'
+
 import {
   LoginAppContainer,
   LoginBoxContainer,
@@ -110,29 +112,40 @@ class Login extends Component {
     }
 
     return (
-      <LoginAppContainer>
-        <LoginBoxContainer>
-          <LogoImage
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="website logo"
-          />
-          <FormContainer onSubmit={this.onSubmitForm}>
-            {this.renderUsername()}
-            {this.renderPassword()}
-            <CheckBoxContainer>
-              <input
-                id="showpassword"
-                type="checkbox"
-                checked={showPassword}
-                onChange={this.onToggleCheckbox}
-              />
-              <label htmlFor="showpassword">Show Password</label>
-            </CheckBoxContainer>
-            <LoginButton type="submit">Login</LoginButton>
-            {showErrMsg && <ErrorMsg>*{errorMsg}</ErrorMsg>}
-          </FormContainer>
-        </LoginBoxContainer>
-      </LoginAppContainer>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <LoginAppContainer isDark={isDark}>
+              <LoginBoxContainer isDark={isDark}>
+                <LogoImage
+                  src={
+                    isDark
+                      ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+                      : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+                  }
+                  alt="website logo"
+                />
+                <FormContainer onSubmit={this.onSubmitForm}>
+                  {this.renderUsername()}
+                  {this.renderPassword()}
+                  <CheckBoxContainer>
+                    <input
+                      id="showpassword"
+                      type="checkbox"
+                      checked={showPassword}
+                      onChange={this.onToggleCheckbox}
+                    />
+                    <label htmlFor="showpassword">Show Password</label>
+                  </CheckBoxContainer>
+                  <LoginButton type="submit">Login</LoginButton>
+                  {showErrMsg && <ErrorMsg>*{errorMsg}</ErrorMsg>}
+                </FormContainer>
+              </LoginBoxContainer>
+            </LoginAppContainer>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

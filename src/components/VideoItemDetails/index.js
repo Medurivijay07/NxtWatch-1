@@ -1,11 +1,12 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import {formatDistanceToNow} from 'date-fns'
-import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
 import {BiListPlus} from 'react-icons/bi'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import SideBar from '../SideBar'
+
+import ThemeContext from '../../context/ThemeContext'
 
 import {
   RightVideoDetailsContainer,
@@ -24,6 +25,8 @@ import {
   RetryButton,
   DisLikeButton,
   SaveButton,
+  AiOutlineLikeIcon,
+  AiOutlineDislikeIcon,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -97,11 +100,7 @@ class VideoItemDetails extends Component {
     this.setState({isDisliked: true, isLiked: false})
   }
 
-  onClickingSaved = () => {
-    this.setState(prevState => ({isSaved: !prevState.isSaved}))
-  }
-
-  renderRightContainer = () => {
+  renderRightContainer = addToSavedVideos => {
     const {videosDetails, isLiked, isDisliked, isSaved} = this.state
     const {
       videoUrl,
@@ -114,6 +113,12 @@ class VideoItemDetails extends Component {
 
     const {profileImageUrl, name, subscriberCount} = channel
 
+    const onClickingSaved = () => {
+      addToSavedVideos(videosDetails)
+      console.log(videosDetails)
+      this.setState(prevState => ({isSaved: !prevState.isSaved}))
+    }
+
     return (
       <RightContainer>
         <ReactPlayerStyle url={videoUrl} width="90%" height="80vh" controls />
@@ -122,27 +127,26 @@ class VideoItemDetails extends Component {
         <ViewsReactionsContainer>
           <p>{viewCount} views .</p>
           <LikesDislikesContainer>
+            <AiOutlineLikeIcon isLiked={isLiked} />
             <LikeButton
               type="button"
               onClick={this.onClickingLike}
               isLiked={isLiked}
             >
-              <AiOutlineLike />
-              <p>Like</p>
+              Like
             </LikeButton>
-
+            <AiOutlineDislikeIcon isDisliked={isDisliked} />
             <DisLikeButton
               type="button"
               onClick={this.onClickingDislike}
               isDisliked={isDisliked}
             >
-              <AiOutlineDislike />
-              <p> Dislike</p>
+              Dislike
             </DisLikeButton>
 
             <SaveButton
               type="button"
-              onClick={this.onClickingSaved}
+              onClick={onClickingSaved}
               isSaved={isSaved}
             >
               <BiListPlus />
@@ -181,11 +185,11 @@ class VideoItemDetails extends Component {
     </FailureViewContainer>
   )
 
-  renderUsingSwitch = () => {
+  renderUsingSwitch = addToSavedVideos => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderRightContainer()
+        return this.renderRightContainer(addToSavedVideos)
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inprogress:
@@ -199,10 +203,17 @@ class VideoItemDetails extends Component {
     return (
       <>
         <Header />
-        <RightVideoDetailsContainer>
-          <SideBar />
-          {this.renderUsingSwitch()}
-        </RightVideoDetailsContainer>
+        <ThemeContext.Consumer>
+          {value => {
+            const {addToSavedVideos, isDark} = value
+            return (
+              <RightVideoDetailsContainer isDark={isDark}>
+                <SideBar />
+                {this.renderUsingSwitch(addToSavedVideos)}
+              </RightVideoDetailsContainer>
+            )
+          }}
+        </ThemeContext.Consumer>
       </>
     )
   }

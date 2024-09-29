@@ -1,5 +1,8 @@
 import {Component} from 'react'
 
+import ThemeContext from '../../context/ThemeContext'
+import SavedVideoItems from '../SavedVideoItems'
+
 import Header from '../Header'
 import SideBar from '../SideBar'
 import {
@@ -9,13 +12,14 @@ import {
   TrendingIcon,
   NoSavedVideosViewContainer,
   NoSavedVideosImage,
+  SavedVideosList,
 } from './styledComponents'
 
 class SavedVideos extends Component {
   state = {savedVideos: []}
 
-  renderSavedVideosBanner = () => (
-    <SavedVideosBanner>
+  renderSavedVideosBanner = isDark => (
+    <SavedVideosBanner isDark={isDark}>
       <TrendingIcon />
       <h1>Saved Videos</h1>
     </SavedVideosBanner>
@@ -32,25 +36,40 @@ class SavedVideos extends Component {
     </NoSavedVideosViewContainer>
   )
 
-  renderRightContainer = () => {
-    const {savedVideos} = this.state
-    return (
-      <SavedVideosRightContainer>
-        {savedVideos.length === 0
-          ? this.renderNoSavedVideosView()
-          : this.renderSavedVideosBanner()}
-      </SavedVideosRightContainer>
-    )
-  }
+  renderSavedVideoItems = (saveVideos, isDark) => (
+    <>
+      {this.renderSavedVideosBanner(isDark)}
+      <SavedVideosList>
+        {saveVideos.map(Item => (
+          <SavedVideoItems key={Item.id} item={Item} />
+        ))}
+      </SavedVideosList>
+    </>
+  )
+
+  renderRightContainer = (saveVideos, isDark) => (
+    <SavedVideosRightContainer>
+      {saveVideos.length === 0
+        ? this.renderNoSavedVideosView()
+        : this.renderSavedVideoItems(saveVideos, isDark)}
+    </SavedVideosRightContainer>
+  )
 
   render() {
     return (
       <>
         <Header />
-        <SavedVideosContainer>
-          <SideBar />
-          {this.renderRightContainer()}
-        </SavedVideosContainer>
+        <ThemeContext.Consumer>
+          {value => {
+            const {saveVideos, isDark} = value
+            return (
+              <SavedVideosContainer isDark={isDark}>
+                <SideBar />
+                {this.renderRightContainer(saveVideos, isDark)}
+              </SavedVideosContainer>
+            )
+          }}
+        </ThemeContext.Consumer>
       </>
     )
   }

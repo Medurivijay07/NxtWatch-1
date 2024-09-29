@@ -5,6 +5,7 @@ export const LoginAppContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${props => (props.isDark ? '#181818' : '')};
 `
 export const LoginBoxContainer = styled.div`
   width: 40%;
@@ -14,6 +15,8 @@ export const LoginBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const LogoImage = styled.img`
   width: 50%;

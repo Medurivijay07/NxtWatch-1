@@ -7,6 +7,8 @@ import Header from '../Header'
 import SideBar from '../SideBar'
 import VideoItem from '../VideoItem'
 
+import ThemeContext from '../../context/ThemeContext'
+
 import {
   RightHomeContainer,
   HomeBannerContainer,
@@ -24,6 +26,7 @@ import {
   FailureViewContainer,
   FailureImage,
   LoaderContainer,
+  IoMdSearchIcon,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -110,24 +113,26 @@ class Home extends Component {
     </HomeBannerContainer>
   )
 
-  renderVideos = () => {
+  renderVideos = isDark => {
     const {searchInput} = this.state
     return (
       <RightHomeContainer>
         {this.renderHomeBanner()}
-        <SearchContainer>
+        <SearchContainer isDark={isDark}>
           <SearchInput
             type="search"
             placeholder="Search"
             onChange={this.onChangeInput}
             value={searchInput}
+            isDark={isDark}
           />
           <SearchIcon
             data-testid="searchButton"
             type="button"
             onClick={this.onClickingSearchIcon}
+            isDark={isDark}
           >
-            <IoMdSearch />
+            <IoMdSearchIcon isDark={isDark} />
           </SearchIcon>
         </SearchContainer>
         {this.renderUsingSwitch()}
@@ -203,13 +208,20 @@ class Home extends Component {
 
   render() {
     return (
-      <div data-testid="home">
+      <>
         <Header />
-        <HomeMainContainer>
-          <SideBar />
-          {this.renderVideos()}
-        </HomeMainContainer>
-      </div>
+        <ThemeContext.Consumer>
+          {value => {
+            const {isDark} = value
+            return (
+              <HomeMainContainer isDark={isDark}>
+                <SideBar />
+                {this.renderVideos(isDark)}
+              </HomeMainContainer>
+            )
+          }}
+        </ThemeContext.Consumer>
+      </>
     )
   }
 }

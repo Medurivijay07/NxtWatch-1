@@ -2,6 +2,8 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
+import ThemeContext from '../../context/ThemeContext'
+
 import SideBar from '../SideBar'
 import Header from '../Header'
 import GamingVideoItem from '../GamingVideoItem'
@@ -66,8 +68,8 @@ class Gaming extends Component {
     this.getGameDetails()
   }
 
-  renderGamingBanner = () => (
-    <GamingBanner>
+  renderGamingBanner = isDark => (
+    <GamingBanner isDark={isDark}>
       <GamingIcon />
       <h1>Gaming</h1>
     </GamingBanner>
@@ -103,9 +105,9 @@ class Gaming extends Component {
     </GamingFailureViewContainer>
   )
 
-  renderGamingRightContainer = () => (
+  renderGamingRightContainer = isDark => (
     <GamingRightContainer>
-      {this.renderGamingBanner()}
+      {this.renderGamingBanner(isDark)}
       {this.renderUsingSwitch()}
     </GamingRightContainer>
   )
@@ -128,10 +130,17 @@ class Gaming extends Component {
     return (
       <div>
         <Header />
-        <GamingRouteContainer>
-          <SideBar />
-          {this.renderGamingRightContainer()}
-        </GamingRouteContainer>
+        <ThemeContext.Consumer>
+          {value => {
+            const {isDark} = value
+            return (
+              <GamingRouteContainer isDark={isDark}>
+                <SideBar />
+                {this.renderGamingRightContainer(isDark)}
+              </GamingRouteContainer>
+            )
+          }}
+        </ThemeContext.Consumer>
       </div>
     )
   }

@@ -4,14 +4,17 @@ import {FaFire} from 'react-icons/fa'
 export const SavedVideosContainer = styled.div`
   min-height: 90vh;
   display: flex;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const SavedVideosRightContainer = styled.div`
   min-height: 90vh;
-  width: 70%;
+  width: 75%;
 `
 export const SavedVideosBanner = styled.div`
   height: 20vh;
-  background-color: #cccccc;
+  background-color: ${props => (props.isDark ? '#181818' : '#cccccc')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
   width: 100%;
   display: flex;
   align-items: center;
@@ -34,4 +37,9 @@ export const NoSavedVideosViewContainer = styled.div`
 `
 export const NoSavedVideosImage = styled.img`
   width: 50%;
+`
+export const SavedVideosList = styled.ul`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
 `

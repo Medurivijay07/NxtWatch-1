@@ -2,6 +2,8 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
+import ThemeContext from '../../context/ThemeContext'
+
 import Header from '../Header'
 import SideBar from '../SideBar'
 import TrendingVideoItem from '../TrendingVideoItem'
@@ -71,8 +73,8 @@ class Trending extends Component {
     this.getTrendingVideos()
   }
 
-  renderTrendingBanner = () => (
-    <TrendingBannerBackground>
+  renderTrendingBanner = isDark => (
+    <TrendingBannerBackground isDark={isDark}>
       <TrendingIcon />
       <h1>Trending</h1>
     </TrendingBannerBackground>
@@ -90,9 +92,9 @@ class Trending extends Component {
     )
   }
 
-  renderRightTrendingRouteContainer = () => (
+  renderRightTrendingRouteContainer = isDark => (
     <RightTrendingContainer>
-      {this.renderTrendingBanner()}
+      {this.renderTrendingBanner(isDark)}
       {this.renderUsingSwitch()}
     </RightTrendingContainer>
   )
@@ -133,10 +135,17 @@ class Trending extends Component {
     return (
       <div>
         <Header />
-        <TrendingRouteContainer>
-          <SideBar />
-          {this.renderRightTrendingRouteContainer()}
-        </TrendingRouteContainer>
+        <ThemeContext.Consumer>
+          {value => {
+            const {isDark} = value
+            return (
+              <TrendingRouteContainer isDark={isDark}>
+                <SideBar />
+                {this.renderRightTrendingRouteContainer(isDark)}
+              </TrendingRouteContainer>
+            )
+          }}
+        </ThemeContext.Consumer>
       </div>
     )
   }

@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import {IoMdClose, IoMdSearch} from 'react-icons/io'
 
 export const RightHomeContainer = styled.div`
   min-height: 90vh;
-  width: 70%;
+  width: 75%;
 `
 export const HomeBannerContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
@@ -13,10 +14,13 @@ export const HomeBannerContainer = styled.div`
   padding-right: 15px;
   padding-top: 10px;
   align-items: flex-start;
+  padding: 30px;
 `
 export const HomeMainContainer = styled.div`
   display: flex;
-  min-height: 90vh;
+  min-height: 85vh;
+  margin: 0px;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
 `
 export const HomeBannerLeftContainer = styled.div`
   display: flex;
@@ -45,18 +49,22 @@ export const SearchContainer = styled.div`
   border-radiud: 7px;
   align-items: center;
   margin-top: 10px;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
 `
 export const SearchInput = styled.input`
   width: 90%;
   padding: 10px;
   border: none;
   outline: none;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const SearchIcon = styled.button`
   width: 10%;
   cursor: pointer;
   outline: none;
   padding: 10px;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
 `
 export const VideosList = styled.ul`
   list-style-type: none;
@@ -98,4 +106,7 @@ export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   color: #00306e;
+`
+export const IoMdSearchIcon = styled(IoMdSearch)`
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `

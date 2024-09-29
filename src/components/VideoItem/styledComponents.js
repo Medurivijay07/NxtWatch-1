@@ -5,6 +5,7 @@ export const VideoItemContainer = styled.li`
   margin-right: 10px;
   margin-bottom: 30px;
   width: 30%;
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const ThumbnailImage = styled.img`
   width: 90%;
@@ -23,7 +24,7 @@ export const VideoDetailsRightContainer = styled.div`
   flex-direction: column;
 `
 export const VideoTitle = styled.p`
-  color: #1e293b;
+  color: ${props => (props.isDark ? '#f9f9f9' : '000000')};
   font-size: 14px;
 `
 export const ViewsPostedContainer = styled.div`
@@ -32,5 +33,8 @@ export const ViewsPostedContainer = styled.div`
 `
 export const LinkItem = styled(Link)`
   text-decoration: none;
-  color: #000000;
+  color: ${props => (props.isDark ? '#ffffff' : '#000000')};
+`
+export const Name = styled.p`
+  color: ${props => (props.isDark ? '#f9f9f9' : '000000')};
 `

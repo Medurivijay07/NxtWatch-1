@@ -4,17 +4,19 @@ import {FaFire} from 'react-icons/fa'
 export const TrendingRouteContainer = styled.div`
   min-height: 90vh;
   display: flex;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
 `
 export const RightTrendingContainer = styled.div`
   min-height: 90vh;
-  width: 70%;
+  width: 75%;
 `
 export const TrendingBannerBackground = styled.div`
-  background-color: #cccccc;
+  background-color: ${props => (props.isDark ? '#181818' : '#cccccc')};
   height: 20vh;
   width: 100%;
   display: flex;
   align-items: center;
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const TrendingIcon = styled(FaFire)`
   color: #ff0000;

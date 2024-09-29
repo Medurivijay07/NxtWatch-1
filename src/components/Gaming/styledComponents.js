@@ -4,14 +4,16 @@ import {SiYoutubegaming} from 'react-icons/si'
 export const GamingRouteContainer = styled.div`
   min-height: 90vh;
   display: flex;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
 `
 export const GamingRightContainer = styled.div`
-  width: 70%;
+  width: 75%;
   min-height: 90vh;
 `
 export const GamingBanner = styled.div`
   height: 20vh;
-  background-color: #cccccc;
+  background-color: ${props => (props.isDark ? '#181818' : '#cccccc')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
   width: 100%;
   display: flex;
   align-items: center;

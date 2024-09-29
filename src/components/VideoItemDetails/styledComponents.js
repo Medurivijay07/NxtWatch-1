@@ -1,16 +1,18 @@
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
+import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
 
 export const RightVideoDetailsContainer = styled.div`
   min-height: 90vh;
   display: flex;
-  padding: 20px;
   padding-bottom: 50px;
+  background-color: ${props => (props.isDark ? '#000000' : '')};
+  color: ${props => (props.isDark ? '#ffffff' : '')};
 `
 export const RightContainer = styled.div`
   min-height: 90vh;
   width: 95%;
-  padding-right: 40px;
+  padding: 40px;
 `
 
 export const ReactPlayerStyle = styled(ReactPlayer)`
@@ -51,6 +53,12 @@ export const SaveButton = styled.button`
   cursor: pointer;
   margin-right: 7px;
   color: ${props => (props.isSaved ? '#2563eb' : '#64748b')};
+`
+export const AiOutlineLikeIcon = styled(AiOutlineLike)`
+  color: ${props => (props.isLiked ? '#2563eb' : '#64748b')};
+`
+export const AiOutlineDislikeIcon = styled(AiOutlineDislike)`
+  color: ${props => (props.isDisliked ? '#2563eb' : '#64748b')};
 `
 
 export const ProfileSubscribersContainer = styled.div`
